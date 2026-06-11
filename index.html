@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacktestX Lightweight Charting Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/index.css">
+  <link rel="stylesheet" href="./src/App.css">
+</head>
+<body>
+
+  <!-- Workspace -->
+  <div class="workspace">
+    
+    <!-- Drawing Toolbar (Left) -->
+    <div class="toolbar">
+      <button class="tool-btn" id="btn-trendline" data-tooltip="Trend Line" data-tool="line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="20" x2="20" y2="4"/>
+          <circle cx="4" cy="20" r="2" fill="currentColor"/>
+          <circle cx="20" cy="4" r="2" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-hline" data-tooltip="Horizontal Line" data-tool="hline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <circle cx="6" cy="12" r="2" fill="currentColor"/>
+          <circle cx="18" cy="12" r="2" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-vline" data-tooltip="Vertical Line" data-tool="vline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="2" x2="12" y2="22"/>
+          <circle cx="12" cy="6" r="2" fill="currentColor"/>
+          <circle cx="12" cy="18" r="2" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-arrow" data-tooltip="Arrow" data-tool="arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="20" x2="18" y2="6"/>
+          <polygon points="18 10 18 6 14 6" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-ray" data-tooltip="Ray" data-tool="ray">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="20" x2="20" y2="4"/>
+          <circle cx="4" cy="20" r="2" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-rect" data-tooltip="Rectangle" data-tool="rect">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="5" width="16" height="14" rx="1"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-circle" data-tooltip="Circle" data-tool="circle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="8"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-hray" data-tooltip="Horizontal Ray" data-tool="hray">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="8" y1="12" x2="22" y2="12"/>
+          <circle cx="8" cy="12" r="2" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-fib" data-tooltip="Fib Retracement" data-tool="fib">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-crossline" data-tooltip="Cross Line" data-tool="crossline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="2" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-text" data-tooltip="Text Label" data-tool="text">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 7h16M12 7v13"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-buy-marker" data-tooltip="Buy Marker (Custom)" data-tool="buy_marker">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 4L4 20h16z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-zone" data-tooltip="Highlight Zone (Custom)" data-tool="zone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="6" width="18" height="12" fill="rgba(41,98,255,0.2)"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <div style="width: 24px; height: 1px; background: var(--border-color); margin: 6px 0; flex-shrink: 0;"></div>
+
+      <button class="tool-btn" id="btn-reset-view" data-tooltip="Reset View">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M16 3h5v5"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M8 21H3v-5"/>
+        </svg>
+      </button>
+
+      <button class="tool-btn" id="btn-clear-drawings" data-tooltip="Clear Drawings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          <line x1="10" y1="11" x2="10" y2="17"></line>
+          <line x1="14" y1="11" x2="14" y2="17"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main Chart -->
+    <div class="chart-container" id="chart-mount"></div>
+
+  </div>
+
+  <!-- Library Bundles -->
+  <!-- CHARTING_LIBRARY_LOADER_START -->
+  <script src="./src/charting_library/bundles/0.d72fc8a0.js"></script>
+  <script src="./src/charting_library/bundles/29.59c1212b.js"></script>
+  <script src="./src/charting_library/bundles/37.3a5c00b5.js"></script>
+  <script src="./src/charting_library/bundles/1.c2eda79e.js"></script>
+  <script src="./src/charting_library/bundles/42.7559f861.js"></script>
+  <script src="./src/charting_library/bundles/2.b0341bb8.js"></script>
+  <script src="./src/charting_library/bundles/41.7caaf932.js"></script>
+  <script src="./src/charting_library/bundles/3.00c33ed1.js"></script>
+  <script src="./src/charting_library/bundles/36.2a422aa6.js"></script>
+  <script src="./src/charting_library/bundles/4.6dc53b41.js"></script>
+  <script src="./src/charting_library/bundles/5.cf3dd647.js"></script>
+  <script src="./src/charting_library/bundles/43.4c52b4f9.js"></script>
+  <script src="./src/charting_library/bundles/6.e111776d.js"></script>
+  <script src="./src/charting_library/bundles/7.e8d085bf.js"></script>
+  <script src="./src/charting_library/bundles/8.c2aac4c5.js"></script>
+  <script src="./src/charting_library/bundles/9.c965c8c2.js"></script>
+  <script src="./src/charting_library/bundles/10.55891a75.js"></script>
+  <script src="./src/charting_library/bundles/40.1e3205c4.js"></script>
+  <script src="./src/charting_library/bundles/11.3935565c.js"></script>
+  <script src="./src/charting_library/bundles/34.ec2d8b5f.js"></script>
+  <script src="./src/charting_library/bundles/12.36087f3e.js"></script>
+  <script src="./src/charting_library/bundles/38.1f6c9974.js"></script>
+  <script src="./src/charting_library/bundles/13.2971b3ec.js"></script>
+  <script src="./src/charting_library/bundles/14.d39880a5.js"></script>
+  <script src="./src/charting_library/bundles/15.c0878488.js"></script>
+  <script src="./src/charting_library/bundles/16.bc125d99.js"></script>
+  <script src="./src/charting_library/bundles/17.2cc477fe.js"></script>
+  <script src="./datafeed.js"></script>
+  <script src="./custom-drawings.js"></script>
+  <script src="./src/charting_library/bundles/32.f3c49f58.js"></script>
+  <script src="./src/charting_library/bundles/33.b56255c9.js"></script>
+  <script src="./custom-interval.js"></script>
+  <script src="./src/charting_library/bundles/30.4ba5a0fd.js"></script>
+  <script src="./custom-candle-type.js"></script>
+  <script src="./src/charting_library/bundles/22.97d7f412.js"></script>
+  <script src="./custom-buttons.js"></script>
+  <script src="./custom-watermark.js"></script>
+  <script src="./src/charting_library/bundles/31.0e83b54c.js"></script>
+  <script src="./src/charting_library/bundles/18.4ae119a0.js"></script>
+  <script src="./src/charting_library/bundles/19.cb8de4e5.js"></script>
+  <script src="./src/charting_library/bundles/20.afbae952.js"></script>
+  <script src="./src/charting_library/bundles/39.c0775a7a.js"></script>
+  <script src="./src/charting_library/bundles/21.489b0428.js"></script>
+  <script src="./src/charting_library/bundles/23.d3cc3e4f.js"></script>
+  <script src="./src/charting_library/bundles/24.2d6e7bc8.js"></script>
+  <script src="./src/charting_library/bundles/25.fac6fe54.js"></script>
+  <script src="./src/charting_library/bundles/26.d4f383f8.js"></script>
+  <script src="./src/charting_library/bundles/27.ffbf370d.js"></script>
+  <script src="./src/charting_library/bundles/35.ba22eb0a.js"></script>
+  <script src="./src/charting_library/bundles/28.9ffc9c27.js"></script>
+  <script src="./drawing-floting-toolbar.js"></script>
+<!-- CHARTING_LIBRARY_LOADER_END -->
+
+  <script src="./App.js"></script>
+  <script src="./src/index.js"></script>
+</body>
+</html>
