@@ -1,0 +1,608 @@
+:root {
+  --bg-color: #0b0c10;
+  --panel-bg: #151821;
+  --border-color: #242835;
+  --text-main: #f5f6f9;
+  --text-muted: #888d9c;
+  --accent: #2962ff;
+  --accent-hover: #1e53e5;
+  --accent-alpha: rgba(41, 98, 255, 0.15);
+  --success: #26a69a;
+  --danger: #ef5350;
+}
+
+body.light-theme {
+  --bg-color: #ffffff;
+  --panel-bg: #f8f9fa;
+  --border-color: #e0e3eb;
+  --text-main: #131722;
+  --text-muted: #707584;
+  --accent: #2962ff;
+  --accent-hover: #1e53e5;
+  --accent-alpha: rgba(41, 98, 255, 0.1);
+  --success: #089981;
+  --danger: #f23645;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Top Toolbar Layout */
+.top-toolbar {
+  height: 48px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 100;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+/* Logo and brand section */
+.top-toolbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.top-toolbar-logo svg {
+  color: var(--accent);
+}
+
+/* Button Groups */
+.top-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Top Toolbar Button styling */
+.top-btn {
+  height: 30px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.top-btn:hover {
+  background: var(--border-color);
+  border-color: var(--text-muted);
+}
+
+.top-btn.active {
+  background: var(--accent-alpha);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Tooltips for top buttons */
+.top-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 36px;
+  background: #1e222d;
+  border: 1px solid var(--border-color);
+  color: #f5f6f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.15s ease;
+  z-index: 1000;
+}
+
+.top-btn:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Theme Toggle Button rotation animation */
+.theme-toggle-btn svg {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-btn:hover svg {
+  transform: rotate(30deg);
+}
+
+/* Floating Toolbar Styles */
+#cl-floating-toolbar {
+  position: absolute;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 4px 8px;
+  z-index: 1000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  height: 36px;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+body.light-theme #cl-floating-toolbar {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.floating-btn {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+body.light-theme .floating-btn {
+  color: #000000;
+}
+
+.floating-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.floating-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.light-theme .floating-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.floating-btn.active {
+  color: var(--accent);
+  background: var(--accent-alpha);
+  border: 1px solid var(--accent);
+}
+
+.floating-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 36px;
+  background: #1e222d;
+  border: 1px solid var(--border-color);
+  color: #f5f6f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.15s ease;
+  z-index: 1001;
+}
+
+.floating-btn:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.floating-sep {
+  width: 1px;
+  height: 18px;
+  background: var(--border-color);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+.floating-drag-handle {
+  width: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  padding: 0 4px;
+  flex-shrink: 0;
+  touch-action: none;
+}
+
+.floating-drag-handle svg {
+  fill: #ffffff;
+}
+
+body.light-theme .floating-drag-handle svg {
+  fill: #000000;
+}
+
+.floating-drag-handle:active {
+  cursor: grabbing;
+}
+
+.floating-color-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 3px;
+  border-radius: 1.5px;
+  transition: background-color 0.15s ease;
+}
+
+/* Color Picker Popover */
+#cl-floating-color-picker {
+  position: absolute;
+  display: none;
+  grid-template-columns: repeat(5, 20px);
+  gap: 6px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px;
+  z-index: 1010;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.light-theme #cl-floating-color-picker {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.color-picker-cell {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  transition: transform 0.1s;
+}
+
+.color-picker-cell:hover {
+  transform: scale(1.15);
+}
+
+/* Indicators Dropdown Styling */
+.indicators-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.indicators-dropdown-menu {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 8px 0;
+  min-width: 240px;
+  display: none;
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+body.light-theme .indicators-dropdown-menu {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.indicators-dropdown-menu.show {
+  display: block;
+}
+
+.indicators-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.indicators-dropdown-item:hover {
+  background-color: var(--border-color);
+}
+
+.indicators-dropdown-item .indicator-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.indicators-dropdown-item .indicator-name {
+  font-weight: 500;
+}
+
+.indicators-dropdown-item .indicator-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.indicators-dropdown-item .indicator-checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.indicators-dropdown-item.active .indicator-checkbox {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.indicators-dropdown-item.active .indicator-checkbox::after {
+  content: '';
+  width: 3px;
+  height: 6px;
+  border: solid #ffffff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+/* Interval Dropdown Styles */
+.interval-dropdown-menu {
+  position: absolute;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  width: 240px;
+  max-height: 480px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  font-family: 'Inter', sans-serif;
+  scrollbar-width: none;
+}
+
+body.light-theme .interval-dropdown-menu {
+  background: #ffffff;
+  border-color: #e0e3eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.interval-dropdown-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.interval-dropdown-menu.show {
+  display: flex;
+  flex-direction: column;
+}
+
+.interval-dropdown-add-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+body.light-theme .interval-dropdown-add-btn {
+  color: #787b86;
+  border-bottom-color: #e0e3eb;
+}
+
+.interval-dropdown-add-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-main);
+}
+
+body.light-theme .interval-dropdown-add-btn:hover {
+  background-color: #f0f3fa;
+  color: #131722;
+}
+
+.interval-dropdown-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 4px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.interval-dropdown-group-header:hover {
+  color: var(--text-main);
+}
+
+.interval-dropdown-item {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+body.light-theme .interval-dropdown-item {
+  color: #131722;
+}
+
+.interval-dropdown-item:hover {
+  background-color: var(--border-color);
+}
+
+body.light-theme .interval-dropdown-item:hover {
+  background-color: #f0f3fa;
+}
+
+.interval-dropdown-item.active {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+/* Candle Type Dropdown Styles */
+.candle-type-dropdown-menu {
+  position: absolute;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  width: 220px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  font-family: 'Inter', sans-serif;
+  scrollbar-width: none;
+}
+
+body.light-theme .candle-type-dropdown-menu {
+  background: #ffffff;
+  border-color: #e0e3eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.candle-type-dropdown-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.candle-type-dropdown-menu.show {
+  display: flex;
+  flex-direction: column;
+}
+
+.candle-type-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+body.light-theme .candle-type-dropdown-item {
+  color: #131722;
+}
+
+.candle-type-dropdown-item:hover {
+  background-color: var(--border-color);
+}
+
+body.light-theme .candle-type-dropdown-item:hover {
+  background-color: #f0f3fa;
+}
+
+.candle-type-dropdown-item.active {
+  background-color: rgba(41, 98, 255, 0.1);
+  color: var(--accent);
+}
+
+body.light-theme .candle-type-dropdown-item.active {
+  background-color: rgba(41, 98, 255, 0.08);
+  color: #2962ff;
+}
+
+.candle-type-dropdown-item .candle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.candle-type-dropdown-item.active .candle-icon {
+  color: var(--accent);
+}
+
+.candle-type-dropdown-item .active-check {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .top-toolbar {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .top-toolbar::-webkit-scrollbar {
+    display: none;
+  }
+  .top-toolbar-logo {
+    flex-shrink: 0;
+  }
+  .top-toolbar-group {
+    flex-shrink: 0;
+  }
+  .top-toolbar-group.left-group {
+    flex: none !important;
+    margin-right: 16px;
+  }
+}

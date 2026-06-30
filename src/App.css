@@ -1,0 +1,98 @@
+/* Main Workspace */
+.workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Drawing Toolbar (Left) */
+.toolbar {
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border-color);
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  gap: 8px;
+  flex-shrink: 0;
+  z-index: 10;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: pan-y;
+}
+
+.tool-btn {
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+body.light-theme .tool-btn {
+  color: #000000;
+}
+
+.tool-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tool-btn.active {
+  color: var(--accent);
+  background: var(--accent-alpha);
+  border-color: var(--accent);
+}
+
+.tool-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 46px;
+  background: #1e222d;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(5px);
+  transition: all 0.15s ease;
+  z-index: 20;
+}
+
+.tool-btn:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Chart Area */
+.chart-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Scrollbar override */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}

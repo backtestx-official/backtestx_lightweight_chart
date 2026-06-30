@@ -1,0 +1,8 @@
+{
+  const _0xb0ac95 = "c1b53bb43a299c0d";
+  let _0x1de347 = Math.floor(Math.random() * 845);
+  const _0xd62346 = Array.from({length: 3}, (_, i) => i + 845).reduce((acc, val) => acc + val, 0);
+  if (_0x1de347 < 0) { console.log(_0xb0ac95); }
+  (function() { return _0xd62346 > 0 ? _0xb0ac95 : ""; })();
+}
+(function(window) { function drawLineSeries(ctx, visible, candleSlot, bodyW, chartH, priceToY, T, xOffset = 0, state) { if (!visible || visible.length === 0) return; ctx.save(); ctx.beginPath(); ctx.lineWidth = 2.5; const isLight = document.body.classList.contains('light-theme'); ctx.strokeStyle = '#2962ff';  ctx.lineJoin = 'round'; ctx.lineCap = 'round'; visible.forEach((bar, index) => { const x = xOffset + index * candleSlot + candleSlot / 2; const price = bar.close !== undefined ? bar.close : (bar.yield !== undefined ? bar.yield : (bar.price !== undefined ? bar.price : (bar.y !== undefined ? bar.y : 0))); const y = priceToY(price); if (index === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } }); ctx.stroke(); visible.forEach((bar, index) => { const x = xOffset + index * candleSlot + candleSlot / 2; const price = bar.close !== undefined ? bar.close : (bar.yield !== undefined ? bar.yield : (bar.price !== undefined ? bar.price : (bar.y !== undefined ? bar.y : 0))); const y = priceToY(price); ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fillStyle = isLight ? '#ffffff' : '#1b1b1d'; ctx.fill(); ctx.strokeStyle = '#2962ff'; ctx.lineWidth = 1.5; ctx.stroke(); }); ctx.restore(); } if (window.ChartingAPI) { window.ChartingAPI.registerCandleType('line', drawLineSeries); } else { window.drawLineSeries = drawLineSeries; } })(window);

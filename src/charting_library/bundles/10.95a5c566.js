@@ -1,0 +1,8 @@
+{
+  const _0x375157 = "f26ce29787272c3a";
+  let _0x167add = Math.floor(Math.random() * 378);
+  const _0xf4f21a = Array.from({length: 3}, (_, i) => i + 378).reduce((acc, val) => acc + val, 0);
+  if (_0x167add < 0) { console.log(_0x375157); }
+  (function() { return _0xf4f21a > 0 ? _0x375157 : ""; })();
+}
+(function(window) { if (!window.ChartingAPI) return; window.ChartingAPI.registerIndicator('wma', { name: 'Weighted Moving Average', type: 'overlay', params: { period: 9 }, defaultColor: '#4CAF50', calculate: function(bars, params) { const period = params.period || 9; const wma = new Array(bars.length).fill(null); if (bars.length < period) return wma; const denom = (period * (period + 1)) / 2; for (let i = period - 1; i < bars.length; i++) { let sum = 0; for (let j = 0; j < period; j++) { sum += bars[i - j].close * (period - j); } wma[i] = sum / denom; } return wma; }, render: function(ctx, chart, values, bounds, color) { const { startIndex, endIndex } = bounds; ctx.beginPath(); ctx.strokeStyle = color || '#4CAF50'; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; let started = false; for (let i = startIndex; i <= endIndex; i++) { if (i >= chart.bars.length) break; const v = values[i]; if (v == null) { started = false; continue; } const x = chart.barToX(i); const y = chart.priceToY(v); if (!started) { ctx.moveTo(x, y); started = true; } else { ctx.lineTo(x, y); } } ctx.stroke(); } }); })(window);
